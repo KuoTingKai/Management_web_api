@@ -8,20 +8,13 @@
         <h1>益炘企業消耗品</h1>
         <form method="POST">
             <select>
-                <option>請選擇你的耗材</option>
-                <option>Dog</option>
-                <option>Cat</option>
-                <option>Hamster</option>
-                <option>Parrot</option>
-                <option>Spider</option>
-                <option>Goldfish</option>
+                {% for item in my_list %}
+                <option value="{{ item }}">{{ item }}</option>
+                {% endfor %}
             </select>
         
             <input type="submit" name="search" value="查詢">
             <input name="update_data">
-            <!-- <form style="display: inline;">
-                更改數量:<input type="text" name="欄位名稱">
-            </form> -->
             <input type="submit" name="update" value="更改">
             {% if name == "" %}
             {% else %}

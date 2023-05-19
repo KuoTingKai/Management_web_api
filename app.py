@@ -1,16 +1,23 @@
 from flask import Flask, render_template, request, redirect, session, abort
 import os
+from model import read_Inventory_name
 
 
 app = Flask(__name__)
 
 @app.route("/", methods=['GET'])
 def index():
+    
+
+    # for i in rows:
+    #     print(list(i))
     return render_template('management.html')
 
 @app.route("/Inventory")
 def Inventory_html():
-    return render_template('Inventory.html')
+    rows = read_Inventory_name().find()
+    rows = [item[0] for item in rows]
+    return render_template('Inventory.html',my_list=rows)
 
 @app.route("/Inventory", methods=['POST'])
 def Inventory():
@@ -19,6 +26,7 @@ def Inventory():
         print("aa")
         name = 'aaaaa'
     
+
 
     return render_template('Inventory.html', name=name)
 
