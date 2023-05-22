@@ -1,7 +1,20 @@
 from sqlalchemy import create_engine, engine, text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.sql import exists
+from model import Inventory
+
+
+
+
+
+
+
+Base = declarative_base()
+
+# class Inventory(Base):
+#     __tablename__ = 'Inventory'
+#     id = Column(Integer, primary_key=True)
+#     name = Column(String(50))
 
 
 class read_Inventory_name:

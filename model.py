@@ -13,11 +13,11 @@ session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
 
-
 class User(Base):
     __tablename__ = 'User'
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True,autoincrement=True)
     name = Column(String(255))
+    order_time = Column(Date,default=datetime.now)
 
     def __init__(self, id=None, name=None):
         self.id = id
@@ -25,98 +25,26 @@ class User(Base):
 
 class Inventory(Base):
     __tablename__ = 'Inventory'
-    id = Column(Integer, primary_key=True)
-    machine_name = Column(String(255))
+    id = Column(Integer, primary_key=True,autoincrement=True)
     comsumed_name = Column(String(255))
     remaining = Column(Integer)
 
-    def __init__(self, id=None, name=None, comsumed_name=None, remaining=None):
+    def __init__(self, id=None, comsumed_name=None, remaining=None):
         self.id = id
-        self.name = name
         self.comsumed_name = comsumed_name
         self.remaining = remaining
-
-class read_Inventory_name:
-    def __init__(self):
-        self.engine = create_engine('mysql+pymysql://root:cov45154551@localhost:3306/yixin')
-        # session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-        # self.engine = engine
-        self.table = Inventory.__table__
-
-    def find(self):
-        Session = sessionmaker(bind=self.engine)
-        session = Session()
-        rows = []
-        try:
-            rows = session.query(self.table.c.comsumed_name).all()
-        except Exception as e:
-            print(e)
-            print('Maybe there is no such name in this database.')
-        finally:
-            session.close()
-            return rows
-
+        
 class Machine(Base):
     __tablename__ = 'Machine'
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True,autoincrement=True)
     machine_name = Column(String(255))
     order_time = Column(Date,default=datetime.now)
-
 
     def __init__(self, id=None, name=None, order_time=None):
         self.id = id
         self.name = name
         self.order_time = order_time
 
-def check(table,email=None,password=None):
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    check_e = False
-    check_p = False
-    
-    if session.query(exists().where(table.c.Email == email)).scalar():
-        check_e = True
-    else:
-        check_e = False
-        return check_e, check_p
-
-    if session.query(table).filter_by(Email=email,Password=password).first():
-        check_p = True
-    else:
-        check_p = False
-
-    session.commit()     #提交會話（事務） 
-    session.rollback()     #回滾會話
-    session.close()     #關閉會話
-
-    return check_e, check_p
-
-
-def changePW(table,email=None,password=None):
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    check_e = False
-    check_p = False
-
-    ins = table.update().values(Password=password).where(email == table.c.Email)
-    conn = engine.connect()
-    conn.execute(ins)
-
-    session.commit()     #提交會話（事務） 
-    session.rollback()     #回滾會話
-    session.close()     #關閉會話
-    return
-
-
-def insert_value(table,email=None,password=None):
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    ins = table.insert().values(Email=email,Password=password)
-    conn = engine.connect()
-    conn.execute(ins)
-    session.commit()     #提交會話（事務） 
-    session.rollback()     #回滾會話
-    session.close()     #關閉會話
 
 
 

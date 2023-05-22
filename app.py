@@ -1,35 +1,37 @@
 from flask import Flask, render_template, request, redirect, session, abort
-import os
-from model import read_Inventory_name
+from Controller.Inventory_control import IC
+
 
 
 app = Flask(__name__)
 
 @app.route("/", methods=['GET'])
 def index():
-    
+    return render_template('main.html')
 
-    # for i in rows:
-    #     print(list(i))
-    return render_template('management.html')
-
-@app.route("/Inventory")
-def Inventory_html():
-    rows = read_Inventory_name().find()
-    rows = [item[0] for item in rows]
-    return render_template('Inventory.html',my_list=rows)
-
-@app.route("/Inventory", methods=['POST'])
+@app.route("/Inventory", methods=['GET','POST'])
 def Inventory():
-    name = ""
-    if request.form.get('search'):
-        print("aa")
-        name = 'aaaaa'
+    select_option = IC().find()
+    select_option = [item[0] for item in select_option]
+ 
+    if request.method == 'POST' and 'search' in request.form:
+        option_value = request.form["option_value"]
+        rows = IC().get(option_value)
+        return render_template('Inventory.html', my_list=select_option, name=rows)
+
+    if request.method == 'POST' and 'update' in request.form:
+        option_value = request.form["option_value"]
+        update_data = request.form["update_data"]
+        rows = IC().update(option_value,update_data)
+        return render_template('Inventory.html', my_list=select_option, name=rows)
     
+    return render_template('Inventory.html', my_list=select_option)
 
 
-    return render_template('Inventory.html', name=name)
 
+@app.route("/sign_in", methods=['GET'])
+def sign_in():
+    return render_template('sign_in.html')
 
 
 
