@@ -2,7 +2,7 @@
     <head>
         <meta charset="utf-8">
         <title>消耗品統計</title>
-        <link rel="stylesheet" href="{{ url_for('static',filename='css/Sign_in_style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/clock_in_style.css') }}">
     </head>
     <body>
         <h1>益炘企業簽到表</h1>
@@ -22,7 +22,7 @@
         <form>
             <input type="submit" value="提交">
         </form>
-        
+
         <script>
             const currentDate = new Date();
             // 获取当前月份的字符串表示（格式：YYYY-MM）
@@ -37,8 +37,6 @@
                 // 这里可以根据需要进行处理
             });
         </script>
-
-
 
         <form method="POST">
             <select style="width:200px" name="option_value"></selectstyle>>

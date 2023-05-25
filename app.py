@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, abort
 from Controller.Inventory_control import IC
-from Controller.Sign_in_control import SIC
+from Controller.Clock_in_control import SIC
 from datetime import datetime, timezone
 import pytz
 
@@ -9,7 +9,9 @@ app = Flask(__name__)
 
 @app.route("/", methods=['GET'])
 def index():
-    return render_template('main.html')
+    # return render_template('main.html')
+    # return render_template('Log_in.html')
+    return render_template('test.html')
 
 @app.route("/Inventory", methods=['GET','POST'])
 def Inventory():
@@ -35,8 +37,10 @@ def Inventory():
 
 
 
-@app.route("/sign_in", methods=['GET'])
-def sign_in():
+@app.route("/clock_in", methods=['GET'])
+def Clock_in():
+    select_option = IC().find()
+    select_option = [item[0] for item in select_option]
     tz = pytz.timezone('Asia/Taipei')
     current_datetime = datetime.now(tz).strftime("%Y-%m-%dT%H:%M")
     
@@ -44,10 +48,11 @@ def sign_in():
     if request.method == 'POST' and 'search' in request.form:
         option_value = request.form["option_value"]
         rows = SIC().get(option_value)
+        selected_option = option_value
         return render_template('Inventory.html', my_list=select_option, name=rows)
     
 
-    return render_template('sign_in.html',current_date=current_datetime)
+    return render_template('clock_in.html',current_date=current_datetime)
 
 
 
