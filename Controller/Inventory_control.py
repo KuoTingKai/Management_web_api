@@ -37,10 +37,11 @@ class IC(Inventory):
         rows = 0
         try:
             rows = session.query(self.table).filter_by(comsumed_name=option_value).update({Inventory.remaining: update_data})
+            session.commit()
             rows = self.get(option_value)
         except Exception as e:
             print(e)
         finally:
-            session.commit()
+
             session.close()
             return rows

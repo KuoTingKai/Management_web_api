@@ -7,21 +7,43 @@
     <body>
         <h1>益炘企業消耗品</h1>
         <form method="POST">
-            <select style="width:200px" name="option_value"></selectstyle>>
+            <select class="option" style="width:200px" name="option_value">
                 {% for item in my_list %}
+                {% if item == selected_option %}
+                <option value="{{ item }}" selected>{{ item }}</option>
+                {% else %}
                 <option value="{{ item }}">{{ item }}</option>
+                {% endif %}
                 {% endfor %}
             </select>
         
             <input type="submit" name="search" value="查詢">
-            <input name="update_data">
+            <input type="text" name="update_data" value="{{ name[2] if name else '' }}" style="text-align: center;">
             <input type="submit" name="update" value="更改">
 
         </form>
-        {% if name %}
-            <p>機器名字 {{name[1]}}</p>
-            <p>耗品名字 {{name[2]}}</p>
-            <p>剩餘數量 {{name[3]}}</p>
-        {% endif %}
+
+        <section>
+            <h2>库存管理</h2>
+            <table class="inventory-table">
+              <thead>
+                <tr>
+                  <th>機器名字</th>
+                  <th>耗品名字</th>
+                  <th>剩餘數量</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                {% if name %}
+                  <td>{{name[1]}}</td>
+                  <td>{{name[2]}}</td>
+                  <td>{{name[3]}}</td>
+                {% endif %}
+                </tr>
+                <!-- 其他库存数据行 -->
+              </tbody>
+            </table>
+          </section>
         </body>
 </html>

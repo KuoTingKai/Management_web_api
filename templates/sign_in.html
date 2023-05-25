@@ -2,10 +2,44 @@
     <head>
         <meta charset="utf-8">
         <title>消耗品統計</title>
-        <!-- <link rel="stylesheet" href="{{ url_for('static',filename='css/Inventory_style.css') }}"> -->
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/Sign_in_style.css') }}">
     </head>
     <body>
-        <h1>益炘企業消耗品</h1>
+        <h1>益炘企業簽到表</h1>
+        <input style="width:200px" type="datetime-local" value="{{ current_date }}"/>
+        <input type="submit" name="sign_in" value="簽到">
+        <!-- <form>
+            <label for="date">选择日期：</label>
+            <input type="date" id="date" name="date">
+    
+            <input type="submit" value="提交">
+        </form> -->
+        
+        <h3>選擇月份</h3>
+        <label for="monthPicker">選擇月份：</label>
+        <input type="month" id="monthPicker" name="monthPicker">
+    
+        <form>
+            <input type="submit" value="提交">
+        </form>
+        
+        <script>
+            const currentDate = new Date();
+            // 获取当前月份的字符串表示（格式：YYYY-MM）
+            const currentMonth = currentDate.toISOString().slice(0, 7);
+            // 设置月份选择框的值为当前月份
+            const monthInput = document.getElementById("monthPicker");
+            monthInput.value = currentMonth;
+            // 获取月份选择框的值
+            monthInput.addEventListener("change", function() {
+                const selectedMonth = monthInput.value;
+                console.log("选择的月份：" + selectedMonth);
+                // 这里可以根据需要进行处理
+            });
+        </script>
+
+
+
         <form method="POST">
             <select style="width:200px" name="option_value"></selectstyle>>
                 {% for item in my_list %}

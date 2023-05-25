@@ -1,0 +1,24 @@
+th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.inventory-table {
+    margin-bottom: 20px;
+}
+
+/* 表格样式 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    
+}
+
+select[name="option_value"] option {
+    text-align: center;
+}
+
+input[type="text"] {
+    text-align: center;
+}

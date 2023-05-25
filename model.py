@@ -45,11 +45,15 @@ class Machine(Base):
         self.name = name
         self.order_time = order_time
 
+class Sign_in(Base):
+    __tablename__ = 'Sign_in'
+    id = Column(Integer, primary_key=True,autoincrement=True)
+    name = Column(String(255))
+    sign_in_time = Column(Date,default=datetime.now)
 
-
-
-
-
+    def __init__(self, id=None, name=None):
+        self.id = id
+        self.name = name
 
 # def add(table, id, name):
 #     Session = sessionmaker(bind=engine)

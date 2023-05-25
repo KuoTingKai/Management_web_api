@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ERP系统</title>
+  <style>
+    /* 通用样式 */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* 导航栏样式 */
+    nav {
+      background-color: #333;
+      color: #fff;
+    }
+    
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+    
+    nav ul li {
+      margin-right: 20px;
+    }
+    
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+    }
+    
+    /* 标题样式 */
+    h1, h2 {
+      color: #333;
+    }
+    
+    /* 表格样式 */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    
+    /* 欢迎信息样式 */
+    .welcome-section {
+      background-color: #f1f1f1;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    /* 客户管理表格样式 */
+    .customer-table {
+      margin-bottom: 20px;
+    }
+    
+    /* 订单管理表格样式 */
+    .order-table {
+      margin-bottom: 20px;
+    }
+    
+    /* 库存管理表格样式 */
+    .inventory-table {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#">首页</a></li>
+        <li><a href="#">客户管理</a></li>
+        <li><a href="#">订单管理</a></li>
+        <li><a href="#">库存管理</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <main>
+    <section class="welcome-section">
+      <h1>欢迎来到ERP系统</h1>
+      <p>在这里，您可以管理客户、订单和库存等企业资源。</p>
+    </section>
+    
+    <section>
+      <h2>客户管理</h2>
+      <table class="customer-table">
+        <thead>
+          <tr>
+            <th>客户ID</th>
+            <th>客户姓名</th>
+            <th>联系方式</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>张三</td>
+            <td>zhangsan@example.com</td>
+          </tr>
+          <!-- 其他客户数据行 -->
+        </tbody>
+      </table>
+    </section>
+    
+    <section>
+      <h2>订单管理</h2>
+      <table class="order-table">
+        <thead>
+          <tr>
+            <th>订单ID</th>
+            <th>客户姓名</th>
+            <th>订单日期</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>张三</td>
+            <td>2023-05-24</td>
+          </tr>
+          <!-- 其他订单数据行 -->
+        </tbody>
+      </table>
+    </section>
+    
+    <section>
+      <h2>库存管理</h2>
+      <table class="inventory-table">
+        <thead>
+          <tr>
+            <th>产品名称</th>
+            <th>库存数量</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>产品A</td>
+            <td>100</td>
+          </tr>
+          <!-- 其他库存数据行 -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>
