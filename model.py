@@ -1,9 +1,10 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import Column, Integer, String, MetaData, Table, Date, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, String, MetaData, Table, Date, UniqueConstraint
 from datetime import datetime
 from sqlalchemy.sql import exists    
+from werkzeug.security import generate_password_hash
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///stock.db"
 
@@ -22,6 +23,20 @@ class User(Base):
     def __init__(self, id=None, name=None):
         self.id = id
         self.name = name
+
+class Account(Base):
+    __tablename__ = 'Account'
+    id = Column(Integer, primary_key=True,autoincrement=True)
+    account = Column(String(255),unique=True,nullable=False)
+    password = Column(String(255),nullable=False)
+
+    __table_args__ = (
+        UniqueConstraint('account', name='unique_account'),
+    )
+
+    def __init__(self, account=None,password=None):
+        self.account = account
+        self.password = generate_password_hash(password)
 
 class Inventory(Base):
     __tablename__ = 'Inventory'
@@ -55,38 +70,14 @@ class Sign_in(Base):
         self.id = id
         self.name = name
 
-# def add(table, id, name):
-#     Session = sessionmaker(bind=engine)
-#     session = Session()
-#     table.id = id
-#     table.name = name
-#     session.commit()
-#     session.rollback()     #回滾會話
-#     session.close()     #關閉會話
-
-
-
-
+## 新增表格
 # Session = sessionmaker(bind=engine)
 # session = Session()
 
 # metadata = MetaData()
-# user = Table('user',Base.metadata,
-# 			 Column('id', Integer(), primary_key=True), 
-# 			 Column('Email', String(255), unique=True),
-#              Column('Password', String(255)) 
-# )
+
 # metadata.create_all(engine)
 # Base.metadata.create_all(engine)
 # session.commit()     #提交會話（事務） 
 # session.rollback()     #回滾會話
 # session.close()     #關閉會話
-
-
-
-
-# email = 'cov85741@gmail.com'
-# password = 'adsfe'
-# 新增 > 查詢 > 
-# insert_value(user,'cov85741@gmail.com','adsfes')
-# print(check(user,email,password))
